@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FavoriteController;
 
 
 
@@ -33,4 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders/received', [OrderController::class, 'receivedOrders']); // الطلبات اللي جاتلي كبائع
     Route::post('/orders/{id}', [OrderController::class, 'updateStatus']);   // قبول / رفض الطلب
 });
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/favorites', [FavoriteController::class, 'index']);
+    Route::post('/favorites/{bookId}', [FavoriteController::class, 'store']);
+    Route::delete('/favorites/{bookId}', [FavoriteController::class, 'destroy']);
 });

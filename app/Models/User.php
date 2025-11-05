@@ -67,5 +67,11 @@ public function boughtOrders()
     return $this->hasMany(Order::class, 'buyer_id');
 }
 
+public function favorites()
+{
+    return $this->belongsToMany(Book::class, 'favorites')->withTimestamps();
+}
+
+
 
 }
